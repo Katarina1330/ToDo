@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "ListTask";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Tasks</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="~/JavaScript/App.js"></script>
+</head>
+<body>
+    <div ng-app="TaskApp" ng-controller="taskCtrl">
+        <h1>List Tasks:</h1>
+        <ul >
+            <li ng-repeat="task in tasks" >
+                {{task.ID + '. ' + task.Title + ', ' + task.Description + ', ' + task.State}} 
+               @*<a href="http://localhost:49878/api/task/getalltasks/ID"  class="button" ng-click="showId(id)">Change Task</a>*@
+            </li>
+        </ul>
+
+    </div>
+
+    <style>
+        a.button{
+            width: 200px;
+            height: 100px;
+            color: aqua;
+        }
+    </style>
+
+</body>
+</html>
