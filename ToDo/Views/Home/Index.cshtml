@@ -10,19 +10,36 @@
     <script src="~/JavaScript/App.js"></script>
 </head>
 <body>
-    <div ng-app="TaskApp" ng-controller="taskCtrl">
-        <h1>List Tasks:</h1>
-        <ul >
-            <li ng-repeat="task in tasks" >
-                {{task.ID + '. ' + task.Title + ', ' + task.Description + ', ' + task.State}} 
-               @*<a href="http://localhost:49878/api/task/getalltasks/ID"  class="button" ng-click="showId(id)">Change Task</a>*@
-            </li>
-        </ul>
+    <h1>List Tasks:</h1>
+    <table ng-app="TaskApp" ng-controller="taskCtrl" border="1">
 
-    </div>
+        <thead>
+            <tr>
+                <td><b>Id</b></td>
+                <td><b>Title</b></td>
+                <td><b>Created Task</b></td>
+                <td><b>Description</b></td>
+                <td><b>State</b></td>
+                <td><b>Deadline Task</b></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="task in tasks">
+                <td>{{task.ID}}</td>
+                <td>{{task.Title}}</td>
+                <td>{{task.CreatedDate}}</td>
+                <td>{{task.Description}}</td>
+                <td>{{task.State}}</td>
+                <td>{{task.DeadlineDate}}</td>
+                @*<a href="http://localhost:49878/api/task/getalltasks/ID"  class="button" ng-click="showId(id)">Change Task</a>*@
+            </tr>
+        </tbody>
+
+    </table>
 
     <style>
-        a.button{
+        a.button {
             width: 100px;
             height: 100px;
             color: aqua;
