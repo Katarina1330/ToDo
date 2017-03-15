@@ -4,12 +4,12 @@ var app = angular.module('TaskApp', []);
 
 // Get All Tasks
 app.controller('taskCtrl', function ($scope, $http) {
-    
+    $scope.isEditMode = false;
+    $scope.toogleEditMode = function (isEditMode) {
+        $scope.isEditMode = !isEditMode;
+    }
     $http.get('http://localhost:49878/api/task/getalltasks').success(function (data, status, headers, config) {
         $scope.tasks = data;
-        //$scope.ShowId = function (event) {
-        //    alert(event.$scope.tasks);
-        //}
     }).error(function (data, status, headers, config) {
         alert("error");
     });
