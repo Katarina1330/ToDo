@@ -28,14 +28,14 @@
         <tbody>
             <tr ng-repeat="task in tasks">
                 <td>{{task.ID}}</td>
-                <td><input type="text" ng-model="task.Title" ng-show="isEditMode"/>{{task.Title}}</td>
+                <td><input type="text" ng-model="task.Title" ng-show="isEditMode"/><span ng-bind="task.Title" ng-show="!isEditMode"></span></td>
                 <td>{{task.CreatedDate}}</td>
-                <td>{{task.Description}}</td>
-                <td>{{task.State}}</td>
-                <td>{{task.DeadlineDate}}</td>
+                <td><input type="text" ng-model="task.Description" ng-show="isEditMode" /><span ng-bind="task.Description" ng-show="!isEditMode"></span></td>
+                <td><input type="text" ng-model="task.State" ng-show="isEditMode" /><span ng-bind="task.State" ng-show="!isEditMode"></span></td>
+                <td><input type="text" ng-model="task.DeadlineDate" ng-show="isEditMode"/><span ng-bind="task.DeadlineDate" ng-show="!isEditMode"></span></td>
                 
+                <td><a href="" ng-hide="isEditMode" ng-click="toogleEditMode(isEditMode)"><i class="material-icons">edit</i></a></td>
                 <td><a href="" ng-show="isEditMode" ng-click="toogleEditMode(isEditMode)" ><i class="material-icons">save</i></a></td>
-                <td><a href="" ng-hide="isEditMode" ng-click="toogleEditMode(isEditMode)" ><i class="material-icons">edit</i></a></td>
             </tr>
         </tbody>
 
