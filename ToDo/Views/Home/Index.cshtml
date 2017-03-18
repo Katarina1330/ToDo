@@ -35,7 +35,7 @@
                 <td><input type="text" ng-model="task.DeadlineDate" ng-show="isEditMode"/><span ng-bind="task.DeadlineDate" ng-show="!isEditMode"></span></td>
                 
                 <td><a href="" ng-hide="isEditMode" ng-click="toogleEditMode(isEditMode)"><i class="material-icons">edit</i></a></td>
-                <td><a href="" ng-show="isEditMode" ng-click="toogleEditMode(isEditMode)" ><i class="material-icons">save</i></a></td>
+                <td><a href="" ng-hide="!isEditMode" ng-click="toogleEditMode(isEditMode); update(task)"><i class="material-icons">save</i></a></td>
             </tr>
         </tbody>
 
