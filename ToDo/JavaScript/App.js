@@ -13,26 +13,12 @@ taskApp.controller('taskCtrl',  ['$scope', '$http', function ($scope, $http) {
     });
 
     $scope.update = function (task) {
-        //if (task) {
-            //var task = {
-            //    "ID": $scope.ID,
-            //    "Title": $scope.Title,
-            //    "CreatedDate": $scope.CreatedDate,
-            //    "Description": $scope.Description,
-            //    "State": $scope.State,
-            //    "DeadlineDate": $scope.DeadlineDate
-            //}
             $http.post('http://localhost:49878/api/task/update', task).success(function (data, status, headers, config) {
-                //alert('Task Added Successfully!');
             }).error(function (data, status, headers, confing) {
                 alert("error");
             });
-       //}
     }
 }]);
-
-
-
 
 // Create new Task
 var taskAdd = angular.module('TaskAdd', []);
@@ -45,7 +31,6 @@ taskAdd.controller('TaskAddController', ['$scope', '$http', function ($scope, $h
                 "State": $scope.State
             }
             $http.post('http://localhost:49878/api/task/add', task).success(function (data, status, headers, config) {
-                //alert('Task Added Successfully!');
             }).error(function (data, status, headers, confing) {
                 alert("error");
             });
