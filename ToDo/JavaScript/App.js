@@ -13,11 +13,20 @@ taskApp.controller('taskCtrl',  ['$scope', '$http', function ($scope, $http) {
     });
 
     $scope.update = function (task) {
-            $http.post('http://localhost:49878/api/task/update', task).success(function (data, status, headers, config) {
-            }).error(function (data, status, headers, confing) {
-                alert("error");
-            });
+        $http.post('http://localhost:49878/api/task/update', task).success(function (data, status, headers, config) {
+        }).error(function (data, status, headers, confing) {
+            alert("error");
+        });
     }
+
+    $scope.delete = function (task) {
+        $http.post('http://localhost:49878/api/task/delete', task).success(function (data, status, headers, config) {
+            alert("uspelo!");
+        }).error(function (data, status, headers, confing) {
+            alert("error");
+        })
+    }
+
 }]);
 
 // Create new Task
