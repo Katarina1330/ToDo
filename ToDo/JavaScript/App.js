@@ -1,30 +1,40 @@
 ﻿
-// Get All Tasks
+
+
+
+var getAllTasksUrl = 'http://localhost:49878/api/task/getalltasks';
+var updateUrl = 'http://localhost:49878/api/task/update';
+var deleteUrl = 'http://localhost:49878/api/task/delete';
+var addUrl = 'http://localhost:49878/api/task/add';
+
+// Get All Tasks:
 var taskApp = angular.module('TaskApp', []);
 taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.isEditMode = false;
     $scope.toogleEditMode = function (isEditMode) {
         $scope.isEditMode = !isEditMode;
     }
-    $http.get('http://localhost:49878/api/task/getalltasks').success(function (data, status, headers, config) {
+    $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
         $scope.tasks = data;
     }).error(function (data, status, headers, config) {
         alert("error");
     });
 
+    // Update Task:
     $scope.update = function (task) {
-        $http.post('http://localhost:49878/api/task/update', task).success(function (data, status, headers, config) {
+        $http.post(updateUrl, task).success(function (data, status, headers, config) {
         }).error(function (data, status, headers, confing) {
             alert("error");
         });
     }
 
+    // Delete Task:
     $scope.delete = function (task) {
         var r = confirm("Do you want to delete your task?");
         if (r == true) {
-            $http.post('http://localhost:49878/api/task/delete', task).success(function (data, status, headers, config) {
+            $http.post(deleteUrl, task).success(function (data, status, headers, config) {
 
-                $http.get('http://localhost:49878/api/task/getalltasks').success(function (data, status, headers, config) {
+                $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
                     $scope.tasks = data;
                 }).error(function (data, status, headers, config) {
                     alert("error");
@@ -33,7 +43,7 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
                 alert("error");
             })
         } else {
-            $http.get('http://localhost:49878/api/task/getalltasks').success(function (data, status, headers, config) {
+            $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
                 $scope.tasks = data;
 
             }).error(function (data, status, headers, config) {
@@ -41,6 +51,24 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
             });
         }
     }
+
+    // Create new Task:
+    $scope.submit = function () {
+        if ($scope.Title) {
+            var task = {
+                "Title": $scope.Title,
+                "CreatedDate": $scope.CreatedDate,
+                "Description": $scope.Description,
+                "State": $scope.State,
+                "DeadlineDate": $scope.DeadlineDate
+            }
+            $http.post(addUrl, task).success(function (data, status, headers, config) {
+            }).error(function (data, status, headers, confing) {
+                alert("error");
+            });
+        }
+    };
+
 }]);
 
 // Create new Task
@@ -55,7 +83,7 @@ taskAdd.controller('TaskAddController', ['$scope', '$http', function ($scope, $h
                 "State": $scope.State,
                 "DeadlineDate": $scope.DeadlineDate
             }
-            $http.post('http://localhost:49878/api/task/add', task).success(function (data, status, headers, config) {
+            $http.post(addUrl, task).success(function (data, status, headers, config) {
             }).error(function (data, status, headers, confing) {
                 alert("error");
             });

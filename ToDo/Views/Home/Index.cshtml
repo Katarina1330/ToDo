@@ -11,9 +11,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="~/JavaScript/App.js"></script>
 </head>
-<body>
+<body ng-app="TaskApp" ng-controller="taskCtrl">
+
+    <h4>Add New Task: </h4>
+    <form name="myForm" ng-submit="submit()">
+        <div>
+            Title: <input type="text" name="title" ng-model="Title" required />
+            <input type="submit" id="taskSubmit" value="Add" />
+        </div>
+    </form>
+
     <h1>List Tasks:</h1>
-    <table ng-app="TaskApp" ng-controller="taskCtrl" border="1">
+    <table border="1">
         <thead>
             <tr>
                 <td><b>Id</b></td>
@@ -28,12 +37,12 @@
         <tbody>
             <tr ng-repeat="task in tasks">
                 <td>{{task.ID}}</td>
-                <td><input type="text" ng-model="task.Title" ng-show="isEditMode"/><span ng-bind="task.Title" ng-show="!isEditMode"></span></td>
-                <td><input type="text" ng-model="task.CreatedDate" ng-show="isEditMode"/><span ng-bind="task.CreatedDate" ng-show="!isEditMode"></span></td>
+                <td><input type="text" ng-model="task.Title" ng-show="isEditMode" /><span ng-bind="task.Title" ng-show="!isEditMode"></span></td>
+                <td><input type="text" ng-model="task.CreatedDate" ng-show="isEditMode" /><span ng-bind="task.CreatedDate" ng-show="!isEditMode"></span></td>
                 <td><input type="text" ng-model="task.Description" ng-show="isEditMode" /><span ng-bind="task.Description" ng-show="!isEditMode"></span></td>
                 <td><input type="text" ng-model="task.State" ng-show="isEditMode" /><span ng-bind="task.State" ng-show="!isEditMode"></span></td>
-                <td><input type="text" ng-model="task.DeadlineDate" ng-show="isEditMode"/><span ng-bind="task.DeadlineDate" ng-show="!isEditMode"></span></td>
-                
+                <td><input type="text" ng-model="task.DeadlineDate" ng-show="isEditMode" /><span ng-bind="task.DeadlineDate" ng-show="!isEditMode"></span></td>
+
                 <td><a href="" ng-hide="isEditMode" ng-click="toogleEditMode(isEditMode)"><i class="material-icons">edit</i></a></td>
                 <td><a href="" ng-hide="!isEditMode" ng-click="toogleEditMode(isEditMode); update(task)"><i class="material-icons">save</i></a></td>
                 <td><a href="" ng-hide="!isEditMode" ng-click="toogleEditMode(isEditMode)"><i class="material-icons">cancel</i></a></td>
@@ -42,6 +51,5 @@
         </tbody>
 
     </table>
-
 </body>
 </html>

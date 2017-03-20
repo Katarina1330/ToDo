@@ -12,10 +12,5 @@ namespace ToDo.Controllers
         {
             return View();
         }
-
-        public ActionResult TaskAdd()
-        {
-            return View();
-        }
     }
 }
