@@ -34,22 +34,14 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
         if (r == true) {
             $http.post(deleteUrl, task).success(function (data, status, headers, config) {
 
-                $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
-                    $scope.tasks = data;
-                }).error(function (data, status, headers, config) {
-                    alert("error");
-                });
             }).error(function (data, status, headers, confing) {
                 alert("error");
             })
-        } else {
-            $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
-                $scope.tasks = data;
 
-            }).error(function (data, status, headers, config) {
-                alert("error");
-            });
-        }
+            $scope.remove = function (task) {
+                $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+            }
+        } 
     }
 
     // Create new Task:
@@ -72,16 +64,7 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
                 alert("error");
             });
         }
-
-
-        //$scope.Title = "";
-        //$scope.
-           
-
     };
-
-
-
 }]);
 
 
