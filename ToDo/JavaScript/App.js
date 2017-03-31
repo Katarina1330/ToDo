@@ -62,33 +62,27 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
                 "State": $scope.State,
                 "DeadlineDate": $scope.DeadlineDate
             }
+
             $http.post(addUrl, task).success(function (data, status, headers, config) {
+                $scope.Title = "";
+                $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
+                    $scope.tasks = data;
+                });
             }).error(function (data, status, headers, confing) {
                 alert("error");
             });
         }
+
+
+        //$scope.Title = "";
+        //$scope.
+           
+
     };
+
+
 
 }]);
 
-// Create new Task
-var taskAdd = angular.module('TaskAdd', []);
-taskAdd.controller('TaskAddController', ['$scope', '$http', function ($scope, $http) {
-    $scope.submit = function () {
-        if ($scope.Title) {
-            var task = {
-                "Title": $scope.Title,
-                "CreatedDate": $scope.CreatedDate,
-                "Description": $scope.Description,
-                "State": $scope.State,
-                "DeadlineDate": $scope.DeadlineDate
-            }
-            $http.post(addUrl, task).success(function (data, status, headers, config) {
-            }).error(function (data, status, headers, confing) {
-                alert("error");
-            });
-        }
-    };
-}]);
 
 
