@@ -50,7 +50,7 @@ namespace ToDo.Controllers
                 dbCtx.SaveChanges();
             }
 
-            return Ok("Successfully created new task!");
+            return Json(newTask);
         }
 
         // Update
