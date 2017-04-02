@@ -37,10 +37,17 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
             }).error(function (data, status, headers, confing) {
                 alert("error");
             })
-
-            $scope.remove = function (task) {
-                $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+            var existingTasks = [];
+            for (var i = 0; i < $scope.tasks.length; i++) {
+                if ($scope.tasks[i].ID != task.ID) {
+                    existingTasks.push($scope.tasks[i]); 
+                }
             }
+            $scope.tasks = existingTasks;
+
+            //$scope.remove = function (task) {
+            //    $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+            //}
         } 
     }
 
@@ -59,7 +66,7 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
                 $scope.Title = "";
                 $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
                     $scope.tasks = data;
-                });
+                }); 
             }).error(function (data, status, headers, confing) {
                 alert("error");
             });
