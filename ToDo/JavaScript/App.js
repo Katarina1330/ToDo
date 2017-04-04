@@ -14,17 +14,22 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.toogleEditMode = function (isEditMode) {
         $scope.isEditMode = !isEditMode;
     }
-    $http.get(getAllTasksUrl).success(function (data, status, headers, config) {
-        $scope.tasks = data;
-    }).error(function (data, status, headers, config) {
+
+    var promise = $http.get(getAllTasksUrl);
+    promise.then(function (response) {
+        $scope.tasks = response.data;
+    }, function (error) {
         alert("error");
     });
 
     // Update Task:
     $scope.update = function (task) {
-        $http.post(updateUrl, task).success(function (data, status, headers, config) {
-        }).error(function (data, status, headers, confing) {
-            alert("error");
+
+        var promise = $http.post(updateUrl, task);
+        promise.then(function (response) {
+        }, function (error) {
+            console.log(error);
+            alert("Error occured!");
         });
     }
 
@@ -32,11 +37,14 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.delete = function (task) {
         var r = confirm("Do you want to delete your task?");
         if (r == true) {
-            $http.post(deleteUrl, task).success(function (data, status, headers, config) {
 
-            }).error(function (data, status, headers, confing) {
-                alert("error");
-            })
+            var promise = $http.post(deleteUrl, task);
+            promise.then(function (response) {
+            }, function (error) {
+                console.log(error);
+                alert("Error occured!");
+            });
+
             var existingTasks = [];
             for (var i = 0; i < $scope.tasks.length; i++) {
                 if ($scope.tasks[i].ID != task.ID) {
@@ -44,10 +52,6 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
                 }
             }
             $scope.tasks = existingTasks;
-
-            //$scope.remove = function (task) {
-            //    $scope.tasks.splice($scope.tasks.indexOf(task), 1);
-            //}
         } 
     }
 
@@ -61,17 +65,15 @@ taskApp.controller('taskCtrl', ['$scope', '$http', function ($scope, $http) {
                 "State": $scope.State,
                 "DeadlineDate": $scope.DeadlineDate
             }
+            var promise = $http.post(addUrl, task);
 
-            $http.post(addUrl, task).success(function (data, status, headers, config) {
+            promise.then(function (response) {
                 $scope.Title = "";
-                var addedTask = data;
+                var addedTask = response.data;
                 $scope.tasks.push(addedTask);
-
-                //$http.get(getAllTasksUrl).success(function (data, status, headers, config) {
-                //    $scope.tasks = data;
-                //}); 
-            }).error(function (data, status, headers, confing) {
-                alert("error");
+            }, function (error) {
+                console.log(error);
+                alert("Error occured!");
             });
         }
     };
