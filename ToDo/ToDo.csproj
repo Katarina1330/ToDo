@@ -259,6 +259,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="JavaScript\App.js" />
+    <Content Include="JavaScript\taskCtrl.js" />
+    <Content Include="JavaScript\taskService.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />

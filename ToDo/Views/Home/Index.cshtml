@@ -10,6 +10,8 @@
           rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="~/JavaScript/App.js"></script>
+    <script src="~/JavaScript/taskCtrl.js"></script>
+    <script src="~/JavaScript/taskService.js"></script>
 </head>
 <body ng-app="TaskApp" ng-controller="taskCtrl">
 
@@ -35,7 +37,7 @@
         </thead>
 
         <tbody>
-            <tr ng-repeat="task in tasks">
+            <tr ng-repeat="task in taskService.tasks">
                 <td>{{task.ID}}</td>
                 <td><input type="text" ng-model="task.Title" ng-show="isEditMode" /><span ng-bind="task.Title" ng-show="!isEditMode"></span></td>
                 <td><input type="text" ng-model="task.CreatedDate" ng-show="isEditMode" /><span ng-bind="task.CreatedDate" ng-show="!isEditMode"></span></td>
